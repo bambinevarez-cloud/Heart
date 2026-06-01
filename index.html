@@ -3,73 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Heart</title>
+<title>Michelle ❤️</title>
 
-<style>
-    body{
-        margin:0;
-        background:black;
-        overflow:hidden;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-    }
+<link rel="stylesheet" href="style.css">
 
-    .container{
-        position:relative;
-        width:500px;
-        height:500px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-    .word{
-        position:absolute;
-        color:#ff9ecf;
-        font-size:18px;
-        font-family:Arial;
-        text-shadow:0 0 10px #fff;
-        animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow{
-        from{
-            transform:scale(1);
-        }
-        to{
-            transform:scale(1.1);
-        }
-    }
-</style>
 </head>
 <body>
 
-<div class="container" id="heart"></div>
+<div id="heart">
+    <div class="letter">Michelle</div>
+</div>
 
 <script>
+
 const heart = document.getElementById("heart");
 
-for(let t = 0; t < Math.PI * 2; t += 0.05){
+for(let t = 0; t < Math.PI * 2; t += 0.04){
 
-    // Fórmula del corazón
-    let x = 16 * Math.pow(Math.sin(t), 3);
-    let y = 13 * Math.cos(t)
-          - 5 * Math.cos(2 * t)
-          - 2 * Math.cos(3 * t)
-          - Math.cos(4 * t);
+    const x =
+        16 * Math.pow(Math.sin(t),3);
 
-    // Escala y posición
-    let posX = x * 15 + 250;
-    let posY = -y * 15 + 250;
+    const y =
+        13 * Math.cos(t)
+        - 5 * Math.cos(2*t)
+        - 2 * Math.cos(3*t)
+        - Math.cos(4*t);
 
     const span = document.createElement("span");
+
     span.className = "word";
     span.innerText = "love you";
+
+    const posX = x * 18 + 400;
+    const posY = -y * 18 + 400;
 
     span.style.left = posX + "px";
     span.style.top = posY + "px";
 
     heart.appendChild(span);
+
+    animateWord(span, t);
 }
+
+function animateWord(element, offset){
+
+    function move(){
+
+        const time = Date.now() * 0.001;
+
+        const x =
+            Math.sin(time + offset * 3) * 6;
+
+        const y =
+            Math.cos(time + offset * 3) * 6;
+
+        element.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+        requestAnimationFrame(move);
+    }
+
+    move();
+}
+
 </script>
 
 </body>
